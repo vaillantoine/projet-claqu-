@@ -1,4 +1,4 @@
-.idea
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -29,3 +29,5 @@ yarn-error.log
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+.idea
