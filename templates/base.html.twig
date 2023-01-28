@@ -9,7 +9,7 @@
     <meta name="Keywords" content="ginfo, groupe, informatique, it, association">
     <meta name="Copyright" content="GINFO">
     <meta name="Revisit-After" content="15 days">
-    <title>{% block titre_page %}GInfo{% endblock %}</title>
+    <title>Projet claqué : Note de frais - {% block title %}{% endblock %}</title>
     <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
     <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
@@ -22,37 +22,33 @@
           rel="stylesheet">
 </head>
 
-<body {% block additionnal_body_block %}{% endblock %} class="theme-indigo {% block additionnal_body_class %}{% endblock %}">
+<body {% block body %}{% endblock %} class="theme-green {% block additionnal_body_class %}{% endblock %}">
 
 <nav class="navbar">
     <div class="container-fluid">
         <div class="navbar-header">
-            {% if is_granted('ROLE_USER') %}
                 {% block mobile_collapse %}
                     <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 {% endblock %}
                 <a href="javascript:void(0);" class="bars"></a>
-            {% endif %}
 
             <a class="navbar-brand" href="/home">
-                GINFO
+                Projet claqué - Note de Frais
             </a>
 
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                {% if is_granted('ROLE_USER') %}
                     <li>
                         <a href="">
                             <i class="material-icons">settings</i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('user_logout') }}">
+                        <a href="">
                             <i class="material-icons">power_settings_new</i>
                         </a>
                     </li>
-                {% endif %}
             </ul>
         </div>
     </div>
@@ -62,15 +58,15 @@
     <aside id="leftsidebar" class="sidebar">
         <div class="menu">
             <ul class="list">
-                <li class="header">Menu</li>
-                <li {% if app.request.pathInfo starts with "/page1" %}class="active"{% endif %}>
-                    <a href="/page1">
-                        <i class="material-icons">search</i> <span>Page 1</span>
+                <!--<li class="header">Menu</li>-->
+                <li {% if app.request.pathInfo starts with path("app_dash_board") %}class="active"{% endif %}>
+                    <a href="{{ path("app_dash_board") }}">
+                        <i class="material-icons">search</i> <span>Mes notes de frais</span>
                     </a>
                 </li>
-                <li {% if app.request.pathInfo starts with "/page2" %}class="active"{% endif %}>
-                    <a href="/page2" id="link_add">
-                        <i class="material-icons">add</i> <span>Page 2</span>
+                <li {% if app.request.pathInfo starts with path("app_edit") %}class="active"{% endif %}>
+                    <a href={{ path("app_edit") }}> <!--id="link_add"-->
+                        <i class="material-icons">add</i> <span>Nouvelle note de frais</span>
                     </a>
                 </li>
             </ul>
