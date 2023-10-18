@@ -1,6 +1,6 @@
 
 {% for expense in expenses %}
-    <tr>
+    <tr onclick="window.location='{{ path('app_view', {id:expense.id}) }}'">
         <td>{{ expense.title }}</td>
         <td>{{ expense.createdOn |date('Y/m/d') }}</td>
         <td>{{ expense.refundedOn |date('Y/m/d') }}</td>
