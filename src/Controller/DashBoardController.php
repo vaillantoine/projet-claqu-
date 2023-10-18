@@ -40,7 +40,6 @@ class DashBoardController extends AbstractController
         $expense = $expenseRepository->find($id);
 
         return $this->render('dash_board/view.html.twig', [
-            'controller_name' => 'DashBoardController',
             'expense' => $expense,
         ]);
     }
