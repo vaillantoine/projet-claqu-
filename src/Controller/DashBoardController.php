@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Expense;
 use App\Repository\ExpenseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,5 +30,18 @@ class DashBoardController extends AbstractController
     public function default(): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         return $this->redirectToRoute("app_dash_board");
+    }
+
+    /**
+     * @Route ("/view/{id}", name="app_view")
+     */
+    public function view(int $id, ExpenseRepository $expenseRepository): Response
+    {
+        $expense = $expenseRepository->find($id);
+
+        return $this->render('dash_board/view.html.twig', [
+            'controller_name' => 'DashBoardController',
+            'expense' => $expense,
+        ]);
     }
 }

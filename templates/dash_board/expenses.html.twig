@@ -1,10 +1,10 @@
-<tbody>
+
 {% for expense in expenses %}
     <tr>
         <td>{{ expense.title }}</td>
         <td>{{ expense.createdOn |date('Y/m/d') }}</td>
         <td>{{ expense.refundedOn |date('Y/m/d') }}</td>
+        <td>{{ expense.refundWay }}</td>
         <td>{{ expense.total }}</td>
     </tr>
 {% endfor %}
-</tbody>
