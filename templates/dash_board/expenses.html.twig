@@ -1,0 +1,10 @@
+
+{% for expense in expenses %}
+    <tr onclick="window.location='{{ path('app_view', {id:expense.id}) }}'">
+        <td>{{ expense.title }}</td>
+        <td>{{ expense.createdOn |date('Y/m/d') }}</td>
+        <td>{{ expense.refundedOn |date('Y/m/d') }}</td>
+        <td>{{ expense.refundWay }}</td>
+        <td>{{ expense.total }}</td>
+    </tr>
+{% endfor %}

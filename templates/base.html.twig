@@ -1,19 +1,106 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="Content-Type" content="UTF-8">
+    <meta name="Content-Language" content="fr">
+    <meta name="Description" content="GInfo - Association d'informatique de Centrale Marseille">
+    <meta name="Keywords" content="ginfo, groupe, informatique, it, association">
+    <meta name="Copyright" content="GINFO">
+    <meta name="Revisit-After" content="15 days">
+    <title>Projet claqué : Note de frais - {% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
+    {% block page_css %}
+    {% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+</head>
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<body {% block body %}{% endblock %} class="theme-green {% block additionnal_body_class %}{% endblock %}">
+
+<nav class="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            {% block mobile_collapse %}
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+            {% endblock %}
+            <a href="javascript:void(0);" class="bars"></a>
+
+            <a class="navbar-brand" href={{ path("default") }}>
+                Projet claqué - Note de Frais
+            </a>
+
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="">
+                            <i class="material-icons">settings</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="material-icons">power_settings_new</i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section>
+    <aside id="leftsidebar" class="sidebar">
+        <div class="menu">
+            <ul class="list">
+                <!--<li class="header">Menu</li>-->
+                <li {% if app.request.pathInfo starts with path("app_dash_board") %}class="active"{% endif %}>
+                    <a href="{{ path("app_dash_board") }}">
+                        <i class="material-icons">search</i> <span>Mes notes de frais</span>
+                    </a>
+                </li>
+                <li {% if app.request.pathInfo starts with path("app_edit_new") %}class="active"{% endif %}>
+                    <a href={{ path("app_edit_new") }}> <!--id="link_add"-->
+                        <i class="material-icons">add</i> <span>Nouvelle note de frais</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</section>
+
+<section class="content">
+    {% block content %}{% endblock %}
+</section>
+
+<div class="footer">
+    <div class="footer-content">
+        <b>GInfo</b> 2019 - <a href="https://assos.centrale-marseille.fr/ginfo">GInfo</a> -
+        <a href="">Mentions légales</a> - <a href="">Données personnelles</a> - <a href="https://wiki.centrale-marseille.fr/ginfo/">Documentation</a>
+    </div>
+</div>
+
+<div id="app-notifs">
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="notif" data-type="{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+<script src="{{ asset('build/vendor.js') }}"></script>
+<script src="{{ asset('build/app.js') }}"></script>
+<script src="{{ asset('build/runtime.js') }}"></script>
+
+
+{% block page_js %}
+{% endblock %}
+</body>
+
 </html>

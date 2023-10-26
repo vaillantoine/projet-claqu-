@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card">
+            <div class="header bg-green">
+                <h2 >Détail de la note de frais {{ expense.title }}</h2>
+                <ul class="header-dropdown">
+                    <li class="dropdown">
+                        <a href="{{ path("app_edit", {id: expense.id}) }}">
+                            <i class="material-icons">edit</i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+
+                <h1 class="text-center">{{ expense.title }}</h1>
+                <br/>
+                <p>{{ expense.comment }}</p>
+                <br/>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Émetteur : {{ expense.author.firstName }} {{ expense.author.lastName }}<br/>
+                            Date d'émission : {{ expense.createdOn | date('Y/m/d') }}
+                        </div>
+                        <div class="col-md-6">
+                            Remboursée
+                            par {% if expense.refundedBy.firstName is defined and expense.refundedBy is not null and expense.refundedBy.lastName is defined and expense.refundedBy.lastName is not null %}{{ expense.refundedBy.firstName }} {{ expense.refundedBy.lastName }}{% endif %}
+                            <br/>
+                            Le {% if expense.refundedOn is defined and expense.refundedOn is not null %}{{ expense.refundedOn | date('Y/m/d') }}{% endif %}
+                            <br/>
+                            En {% if expense.refundWay is defined and expense.refundWay is not null %}{{ expense.refundWay }}{% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Nature</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Montant</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {% for expenseLine in expense.linesContained %}
+                        <tr>
+                            <td>{{ expenseLine.nature }}</td>
+                            <td>{{ expenseLine.description }}</td>
+                            <td>{{ expenseLine.invoiceDate | date('y/m/d') }}</td>
+                            <td>{{ expenseLine.amount }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
