@@ -6,7 +6,14 @@
     <div class="container-fluid">
         <div class="card">
             <div class="header bg-green">
-                <h2>Détail de la note de frais {{ expense.title }}</h2>
+                <h2 >Détail de la note de frais {{ expense.title }}</h2>
+                <ul class="header-dropdown">
+                    <li class="dropdown">
+                        <a href="{{ path("app_edit", {id: expense.id}) }}">
+                            <i class="material-icons">edit</i>
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="body">
 

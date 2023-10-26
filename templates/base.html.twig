@@ -64,8 +64,8 @@
                         <i class="material-icons">search</i> <span>Mes notes de frais</span>
                     </a>
                 </li>
-                <li {% if app.request.pathInfo starts with path("app_edit") %}class="active"{% endif %}>
-                    <a href={{ path("app_edit") }}> <!--id="link_add"-->
+                <li {% if app.request.pathInfo starts with path("app_edit_new") %}class="active"{% endif %}>
+                    <a href={{ path("app_edit_new") }}> <!--id="link_add"-->
                         <i class="material-icons">add</i> <span>Nouvelle note de frais</span>
                     </a>
                 </li>
